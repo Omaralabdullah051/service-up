@@ -1,0 +1,20 @@
+[
+    {
+        "id": "lajdieoplsdd",
+        "img": "./images/camera-1.png",
+        "title": "HDR landscape",
+        "discription": "HDR photography essentially involves taking a number of photos at different exposures - either manually or using your DSLR's autoexposure bracketing function - and then blending the best bits of each exposure into a single image."
+    },
+    {
+        "id": "lajdssdfopdd",
+        "img": "./images/camera-2.png",
+        "title": " Tilt-shift landscapes",
+        "discription": "Tilt-shift photography enables you to combine the sharpness of large lens apertures with the extensive depth of field you normally associate with small apertures."
+    },
+    {
+        "id": "lajdias2dsdd",
+        "img": "./images/camera-3.png",
+        "title": "Minimalist landscapes",
+        "discription": "Telephoto zooms will help you to frame interesting details that would make for a great minimalist landscape. Look for single trees, lone clouds and isolated rocks."
+    }
+]
