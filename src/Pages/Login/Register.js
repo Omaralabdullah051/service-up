@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './Login.css';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
-    const [createUserWithEmailAndPassword, user, loading, hookError,] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, , hookError,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
 
@@ -66,18 +67,22 @@ const Register = () => {
         await updateProfile({ displayName: userInfo.name });
     }
 
-    useEffect(() => {
-        if (user) {
-            navigate('/');
-        }
-    }, [user, navigate]);
+    const handleGoogleSignIn = () => {
+        signInWithGoogle();
+    }
 
     useEffect(() => {
-        const error = hookError
+        if (user || googleUser) {
+            navigate('/');
+        }
+    }, [user, navigate, googleUser]);
+
+    useEffect(() => {
+        const error = hookError || googleError
         if (error) {
             toast(error?.message);
         }
-    }, [hookError]);
+    }, [hookError, googleError]);
 
     return (
         <div className='auth-container'>
@@ -98,7 +103,7 @@ const Register = () => {
                 <div className='mx-2'>Or</div>
                 <div className='w-44 h-1 bg-slate-700'></div>
             </div>
-            <button className='p-3 bg-slate-700 text-white w-[400px] block mx-auto mt-4 mb-8 font-semibold'>Google Sign In</button>
+            <button onClick={handleGoogleSignIn} className='p-3 bg-slate-700 text-white w-[400px] block mx-auto mt-4 mb-8 font-semibold'>Google Sign In</button>
             <ToastContainer />
         </div>
     );
