@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Login.css';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -75,22 +75,7 @@ const Register = () => {
     useEffect(() => {
         const error = hookError
         if (error) {
-            switch (error?.code) {
-                case "uth/email-already-exists":
-                    toast("This email is already exists");
-                    break;
-
-                case "auth/invalid-email":
-                    toast("Invalid email provided, please provide a valid email");
-                    break;
-
-                case "auth/invalid-password":
-                    toast("Wrong password");
-                    break;
-
-                default:
-                    toast(error?.message);
-            }
+            toast(error?.message);
         }
     }, [hookError]);
 
@@ -105,14 +90,15 @@ const Register = () => {
                 {errors?.passwordError && <p className='text-center text-red-700'>{errors?.passwordError}</p>}
                 <input onChange={handleConfirmPassword} type="password" name="confirm-password" id="confirm-password" placeholder='Confirm password' required />
                 {errors?.confirmPasswordError && <p className='text-center text-red-700'>{errors?.confirmPasswordError}</p>}
+                <p className='text-center mt-4'>Already have an account? <Link className='text-slate-700 font-bold' to="/login">Please Login</Link></p>
                 <input className='bg-slate-700 text-white cursor-pointer' type="submit" value="Register" />
             </form>
-            <div className='flex justify-centers items-center pl-[55px]'>
+            <div className='flex justify-centers items-center pl-[55px] mt-4'>
                 <div className='w-44 h-1 bg-slate-700'></div>
                 <div className='mx-2'>Or</div>
                 <div className='w-44 h-1 bg-slate-700'></div>
             </div>
-            <button className='p-2 bg-slate-700 text-white w-[400px] block mx-auto mt-4 mb-8 font-semibold'>Google Sign In</button>
+            <button className='p-3 bg-slate-700 text-white w-[400px] block mx-auto mt-4 mb-8 font-semibold'>Google Sign In</button>
             <ToastContainer />
         </div>
     );
