@@ -1,5 +1,5 @@
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useRef } from 'react';
@@ -11,6 +11,8 @@ const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -44,9 +46,9 @@ const Login = () => {
 
     useEffect(() => {
         if (user) {
-            navigate('/');
+            navigate(from, { replace: true });
         }
-    }, [user, navigate]);
+    }, [user, navigate, from]);
 
     return (
         <div className='auth-container'>
