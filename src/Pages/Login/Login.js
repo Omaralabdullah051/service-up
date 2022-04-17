@@ -3,12 +3,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useRef } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const Login = () => {
     const [signInWithEmailAndPassword, user, , hookError,] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(
+        auth
+    );
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
@@ -21,6 +24,17 @@ const Login = () => {
         const password = passwordRef.current.value;
         signInWithEmailAndPassword(email, password);
     };
+
+    const handleResetPassword = async () => {
+        const email = emailRef.current.value;
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email for reset password. check your inbox')
+        }
+        else {
+            toast('Provide your email')
+        }
+    }
 
     const handleGoogleSignIn = () => {
         signInWithGoogle();
@@ -61,6 +75,7 @@ const Login = () => {
             <form onSubmit={handleSubmit} className='form-container mt-12'>
                 <input ref={emailRef} type="email" name="email" id="email" placeholder='Your Email' required />
                 <input ref={passwordRef} type="password" name="password" id="password" placeholder='Password' required />
+                <p className='text-center mt-4'>Forget password? <button onClick={handleResetPassword} className="text-slate-700 font-bold">Reset password</button></p>
                 <p className='text-center mt-4'>New to this site? <Link className='text-slate-700 font-bold' to="/signup">Please Register</Link></p>
                 <input className='bg-slate-700 text-white cursor-pointer' type="submit" value="Login" />
             </form>
