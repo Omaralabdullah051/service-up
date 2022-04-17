@@ -1,20 +1,23 @@
 [
     {
+        "id": "dsldljfkldjskl",
         "name": "Professional camera and lens kits",
         "price": "$1200",
         "img": "https://i.postimg.cc/jjC9PSVR/picture1.png",
         "discription": "A most concerned issue is the uses of camera and lens kits. These things are really dominate in the photography field. As a professional photographer you must concern about your camera and needs a standard telephoto lens which helps you to capture creative unflattering pictures in the overall stadium."
     },
     {
+        "id": "1papdssdklj",
         "name": " Hyperfocal focusing & Long lens landscapes",
         "price": "$1500",
         "img": "https://i.postimg.cc/7L6v9Nz8/basketball.png",
         "discription": "It's instinctive to reach for a wide-angle lens when photographing landscapes, but a telephoto lens is also an essential part of the creative landscape photographer's camera kit. A telephoto lens enables you to compress the elements of a scene, making the foreground and background appear closer together than in a photo taken with an ultra-wide lens."
     },
     {
+        "id": "8934ejdsl",
         "name": "Long-exposure landscapes & Panoramas",
         "price": "$1900",
-        "img": "https://i.postimg.cc/7L6v9Nz8/basketball.png",
+        "img": "https://i.postimg.cc/65YYcxfq/football.png",
         "discription": "We provide Higher Logn-exposure landscapes .Using a long exposure to photograph a landscape will cause any moving elements to be recorded as motion blur. Getting a slow enough exposure usually requires a small aperture, low ISO and low light. However, you can also achieve this in bright daylight by attaching a Neutral Density filter to the lens."
     }
 ]
