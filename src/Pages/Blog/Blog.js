@@ -5,7 +5,7 @@ import Question3 from './Questions/Question3';
 
 const Blog = () => {
     return (
-        <div className='mt-20 px-8 space-y-20'>
+        <div className='mt-8 md:mt-16 px-8 space-y-20'>
             <Question1 />
             <Question2 />
             <Question3 />
