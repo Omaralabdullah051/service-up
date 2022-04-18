@@ -10,18 +10,30 @@ import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
 import RequireAuth from './Pages/Shared/RequireAuth/RequireAuth';
 import About from './Pages/About/About';
+import Info from './Pages/Info/Info'
+import React, { useState } from 'react';
 
 function App() {
+
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+
   return (
     <div>
-      <Header></Header>
+      <Header userInfo={userInfo}></Header>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/checkout' element={<RequireAuth><Checkout /></RequireAuth>} />
         <Route path='/blogs' element={<Blog />} />
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Register />} />
+        <Route path='/info' element={<Info />} />
+        <Route path='/signup' element={<Register userInfo={userInfo} setUserInfo={setUserInfo} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

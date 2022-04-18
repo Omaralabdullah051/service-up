@@ -6,17 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Register = () => {
+const Register = ({ userInfo, setUserInfo }) => {
     const [createUserWithEmailAndPassword, user, , hookError,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [signInWithGoogle, googleUser, , googleError] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
-
-    const [userInfo, setUserInfo] = useState({
-        name: '',
-        email: '',
-        password: ''
-    });
 
     const [errors, setErrors] = useState({
         emailError: '',
@@ -53,18 +47,25 @@ const Register = () => {
     };
 
     const handleConfirmPassword = e => {
-        if (e.target.value !== userInfo.password) {
-            setErrors({ ...errors, confirmPasswordError: "Your two password doesn't matched" });
+        if (e.target.value === userInfo.password) {
+            setUserInfo({ ...userInfo, confirmPassword: e.target.value });
+            setErrors({ ...errors, confirmPasswordError: "" });
         }
         else {
-            setErrors({ ...errors, confirmPasswordError: "" });
+            setErrors({ ...errors, confirmPasswordError: "Your two password doesn't matched" });
+            setUserInfo({ ...userInfo, confirmPassword: '' });
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await createUserWithEmailAndPassword(userInfo.email, userInfo.password);
-        await updateProfile({ displayName: userInfo.name });
+        if (userInfo.password !== userInfo.confirmPassword) {
+            toast('Your two passwords does not matched');
+        }
+        else {
+            await createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+            await updateProfile({ displayName: userInfo.name });
+        }
     }
 
     const handleGoogleSignIn = () => {
@@ -72,10 +73,15 @@ const Register = () => {
     }
 
     useEffect(() => {
-        if (user || googleUser) {
+        if (userInfo.password === userInfo.confirmPassword) {
+            if (user) {
+                navigate('/');
+            }
+        }
+        if (googleUser) {
             navigate('/');
         }
-    }, [user, navigate, googleUser]);
+    }, [user, navigate, googleUser, userInfo]);
 
     useEffect(() => {
         const error = hookError || googleError

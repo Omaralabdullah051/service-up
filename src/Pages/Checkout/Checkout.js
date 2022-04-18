@@ -6,7 +6,7 @@ const Checkout = () => {
     const [user] = useAuthState(auth);
     return (
         <div>
-            <h2 className='text-center mt-10 font-bold'>{user?.displayName ? `Hey ${user?.displayName}! Please fill up this form` : 'Hey Mr.X! Please fill up this form'}</h2>
+            <h6 className='text-center mt-10 font-bold md:text-3xl xl:text-4xl mx-2'>{user?.displayName ? `Hey ${user?.displayName}! Please stay with us for latest update` : 'Hey Mr.X! Please stay with us for latest update'}</h6>
         </div>
     );
 };
