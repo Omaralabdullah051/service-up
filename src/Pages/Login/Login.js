@@ -79,12 +79,12 @@ const Login = () => {
                 <p className='text-center mt-4'>New to this site? <Link className='text-slate-700 font-bold' to="/signup">Please Register</Link></p>
                 <input className='bg-slate-700 text-white cursor-pointer' type="submit" value="Login" />
             </form>
-            <div className='flex justify-centers items-center pl-[55px] mt-4'>
-                <div className='w-44 h-1 bg-slate-700'></div>
-                <div className='mx-2'>Or</div>
-                <div className='w-44 h-1 bg-slate-700'></div>
+            <div className='flex justify-centers items-center pl-[23px] md:pl-[55px] mt-4'>
+                <div className='w-28 md:w-44 h-1 bg-slate-700'></div>
+                <div className='mx-1 md:mx-2'>Or</div>
+                <div className='w-28 md:w-44 h-1 bg-slate-700'></div>
             </div>
-            <button onClick={handleGoogleSignIn} className='p-3 bg-slate-700 text-white w-[400px] block mx-auto mt-4 mb-8 font-semibold'>Google Sign In</button>
+            <button onClick={handleGoogleSignIn} className='p-3 bg-slate-700 text-white w-[250px] md:w-[400px] block mx-auto mt-4 mb-8 font-semibold'>Google Sign In</button>
             <ToastContainer />
         </div>
     );
